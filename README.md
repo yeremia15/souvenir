@@ -1,4 +1,3 @@
-
 # Aplikasi Persediaan Souvenir
 
 Aplikasi ini dibangun menggunakan bahasa pemrograman PHP dan database MySQL. Untuk cara mengakses databasenya menggunakan MySQLi Extension dengan konsep pemrograman prosedural.
