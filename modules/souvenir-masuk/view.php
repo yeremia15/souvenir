@@ -52,6 +52,7 @@
               <tr>
                 <th class="center">No.</th>
                 <th class="center">Kode Transaksi</th>
+                <th class="center">Periode Masuk</th>
                 <th class="center">Tanggal</th>
                 <th class="center">Kode Souvenir</th>
                 <th class="center">Nama Souvenir</th>
@@ -74,11 +75,13 @@
               $tanggal         = $data['tanggal_masuk'];
               $exp             = explode('-',$tanggal);
               $tanggal_masuk   = $exp[2]."-".$exp[1]."-".$exp[0];
+              $periode_masuk = date('F', strtotime($tanggal_masuk));
 
               // menampilkan isi tabel dari database ke tabel di aplikasi
               echo "<tr>
                       <td width='30' class='center'>$no</td>
                       <td width='100' class='center'>$data[kode_transaksi]</td>
+                      <td width='80' class='center'>$periode_masuk</td>
                       <td width='80' class='center'>$tanggal_masuk</td>
                       <td width='80' class='center'>$data[kode_souvenir]</td>
                       <td width='200'>$data[nama_souvenir]</td>
