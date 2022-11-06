@@ -1,13 +1,3 @@
-<!-- Aplikasi Persediaan Obat pada Apotek
-*******************************************************
-* Developer    : Vanny Hadiwijaya, S.Kom
-* Company      : Wijaya Studio
-* Release Date : 14 November 2018
-* Blog         : vannyhadiwijaya.blogspot.com
-* E-mail       : vannyhadiwijaya@gmail.com
-* Phone        : +62-821-3297-2137
--->
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
