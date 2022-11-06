@@ -98,11 +98,21 @@ if (isset($_GET['tgl_awal'])) {
     // jika data tidak ada
     else {
         // tampilkan data
+        $real_stok = [];
         while ($data = mysqli_fetch_assoc($query)) {
             $tanggal       = $data['tanggal_keluar'];
             $exp           = explode('-',$tanggal);
             $tanggal_keluar = $exp[2]."-".$exp[1]."-".$exp[0];
+            $a = $data['stok_awal'];
+            $b = $data['jumlah_masuk'];
+            $c = $data['jumlah_keluar'];
             $periode = date('F', strtotime($tanggal));
+            $stok_akhir = $a + $b - $c;
+            if (isset($real_stok[$data['kode_souvenir']])){
+                $real_stok[$data['kode_souvenir']]+= $stok_akhir;
+              } else {
+                $real_stok[$data['kode_souvenir']]= $stok_akhir;
+              }
 
             // menampilkan isi tabel dari database ke tabel di aplikasi
             echo "  <tr>
@@ -115,7 +125,7 @@ if (isset($_GET['tgl_awal'])) {
                         <td style='padding-right:10px;' width='100' height='13' align='right' valign='middle'>$data[stok_awal]</td>
                         <td style='padding-right:10px;' width='100' height='13' align='right' valign='middle'>$data[jumlah_masuk]</td>
                         <td style='padding-right:10px;' width='100' height='13' align='right' valign='middle'>$data[jumlah_keluar]</td>
-                        <td width='80' height='13' align='center' valign='middle'>$data[stok]</td>
+                        <td width='80' height='13' align='center' valign='middle'>".$real_stok[$data['kode_souvenir']]."</td>
                         <td width='80' height='13' align='center' valign='middle'>$data[unit_kerja]</td>
                         <td width='80' height='13' align='center' valign='middle'>$data[alasan]</td>
 

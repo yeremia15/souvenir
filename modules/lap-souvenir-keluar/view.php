@@ -75,15 +75,25 @@
             from is_souvenir_keluar as a
             inner join is_souvenir as b on a.kode_souvenir = b.kode_souvenir 
             inner join is_souvenir_masuk as c on c.kode_souvenir = a.kode_souvenir 
-            ORDER BY kode_transaksi DESC; ")
+            ORDER BY a.created_date ASC; ")
             or die('Ada kesalahan pada query tampil Data souvenir Masuk: '.mysqli_error($mysqli));
 
+            $real_stok = [];
             // tampilkan data
             while ($data = mysqli_fetch_assoc($query)) { 
               $tanggal         = $data['tanggal_keluar'];
               $exp             = explode('-',$tanggal);
               $tanggal_keluar   = $exp[2]."-".$exp[1]."-".$exp[0];
+              $a = $data['stok_awal'];
+              $b = $data['jumlah_masuk'];
+              $c = $data['jumlah_keluar'];
               $periode = date('F', strtotime($tanggal));
+              $stok_akhir = $a + $b - $c;
+              if (isset($real_stok[$data['kode_souvenir']])){
+                $real_stok[$data['kode_souvenir']]+= $stok_akhir;
+              } else {
+                $real_stok[$data['kode_souvenir']]= $stok_akhir;
+              }
 
               // menampilkan isi tabel dari database ke tabel di aplikasi
               echo "<tr>
@@ -96,7 +106,7 @@
                       <td width='100' align='right'>$data[stok_awal]</td>
                       <td width='100' align='right'>$data[jumlah_masuk]</td>
                       <td width='100' align='right'>$data[jumlah_keluar]</td>
-                      <td width='100' align='right'>$data[stok]</td>
+                      <td width='100' align='right'>".$real_stok[$data['kode_souvenir']]."</td>
                       <td width='80' class='center'>$data[satuan]</td>
                       <td width='80' class='center'>$data[unit_kerja]</td>
                       <td width='80' class='center'>$data[alasan]</td>
