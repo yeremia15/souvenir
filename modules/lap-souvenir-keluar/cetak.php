@@ -62,6 +62,7 @@ if (isset($_GET['tgl_awal'])) {
                     <tr class="tr-title">
                         <th height="20" align="center" valign="middle">NO.</th>
                         <th height="20" align="center" valign="middle">KODE TRANSAKSI</th>
+                        <th height="20" align="center" valign="middle">PERIODE</th>
                         <th height="20" align="center" valign="middle">TANGGAL</th>
                         <th height="20" align="center" valign="middle">KODE SOUVENIR</th>
                         <th height="20" align="center" valign="middle">NAMA SOUVENIR</th>
@@ -83,6 +84,7 @@ if (isset($_GET['tgl_awal'])) {
                     <td width='120' height='13' align='center' valign='middle'></td>
                     <td width='80' height='13' align='center' valign='middle'></td>
                     <td width='80' height='13' align='center' valign='middle'></td>
+                    <td width='80' height='13' align='center' valign='middle'></td>
                     <td style='padding-left:5px;' width='155' height='13' valign='middle'></td>
                     <td style='padding-right:10px;' width='100' height='13' align='right' valign='middle'></td>
                     <td style='padding-right:10px;' width='100' height='13' align='right' valign='middle'></td>
@@ -100,11 +102,13 @@ if (isset($_GET['tgl_awal'])) {
             $tanggal       = $data['tanggal_keluar'];
             $exp           = explode('-',$tanggal);
             $tanggal_keluar = $exp[2]."-".$exp[1]."-".$exp[0];
+            $periode = date('F', strtotime($tanggal));
 
             // menampilkan isi tabel dari database ke tabel di aplikasi
             echo "  <tr>
                         <td width='40' height='13' align='center' valign='middle'>$no</td>
                         <td width='120' height='13' align='center' valign='middle'>$data[kode_transaksi]</td>
+                        <td width='80' height='13' align='center' valign='middle'>$periode</td>
                         <td width='80' height='13' align='center' valign='middle'>$tanggal_keluar</td>
                         <td width='80' height='13' align='center' valign='middle'>$data[kode_souvenir]</td>
                         <td style='padding-left:5px;' width='155' height='13' valign='middle'>$data[nama_souvenir]</td>
